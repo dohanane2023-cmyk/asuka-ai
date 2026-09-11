@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASUKA AI â€” Your AI Coding Agent for Windows</title>
+<meta name="description" content="ASUKA AI is a local-first Windows AI coding agent with full PC access. Chat, code, and ship â€” all on your machine.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="ASUKA AI â€” Your AI Coding Agent for Windows">
+<meta property="og:description" content="Local-first AI agent with full PC access. 17+ tools, 425+ models, 100% local.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://asuka-ai-app-2026.netlify.app">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--bg2:#0f0f13;--bg3:#16161d;--border:rgba(255,255,255,0.06);
+  --text:#fafafa;--text2:#a1a1aa;--text3:#71717a;
+  --blue:#3b82f6;--cyan:#06b6d4;--purple:#8b5cf6;--green:#22c55e;
+  --grad1:linear-gradient(135deg,#3b82f6,#06b6d4);
+  --grad2:linear-gradient(135deg,#8b5cf6,#3b82f6);
+  --grad3:linear-gradient(135deg,#06b6d4,#22c55e);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(9,9,11,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.nav-logo .icon{width:32px;height:32px;border-radius:8px;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:14px;color:var(--text2);transition:color .2s;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{padding:8px 20px;border-radius:10px;background:var(--grad1);color:#fff!important;font-weight:600;font-size:14px;transition:all .2s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,0.3)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative}
+.hero::before{content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.12) 0%,rgba(6,182,212,0.06) 40%,transparent 70%);pointer-events:none;filter:blur(40px)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);color:var(--blue);font-size:13px;font-weight:500;margin-bottom:28px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-0.04em;margin-bottom:20px}
+h1 .grad{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:grad 4s ease infinite}
+@keyframes grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.subtitle{font-size:clamp(1rem,2vw,1.25rem);color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:40px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:60px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;transition:all .25s;cursor:pointer;border:none}
+.btn-primary{background:var(--grad1);color:#fff;box-shadow:0 0 40px rgba(59,130,246,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(59,130,246,0.4)}
+.btn-ghost{background:rgba(255,255,255,0.04);color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12)}
+.btn svg{width:18px;height:18px}
+
+/* HERO MOCKUP */
+.hero-mockup{width:100%;max-width:900px;border-radius:16px;background:var(--bg2);border:1px solid var(--border);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.5)}
+.mockup-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.mockup-dot{width:12px;height:12px;border-radius:50%}
+.mockup-dot.r{background:#ef4444}.mockup-dot.y{background:#eab308}.mockup-dot.g{background:#22c55e}
+.mockup-title{margin-left:12px;font-size:13px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+.mockup-body{padding:24px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;min-height:280px;color:var(--text2)}
+.mockup-body .prompt{color:var(--cyan)}
+.mockup-body .cmd{color:var(--green)}
+.mockup-body .comment{color:var(--text3)}
+.mockup-body .tool{color:var(--purple);background:rgba(139,92,246,0.1);padding:2px 8px;border-radius:4px}
+.mockup-body .file{color:var(--blue)}
+
+/* STATS BAR */
+.stats{display:flex;justify-content:center;gap:60px;padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{text-align:center}
+.stat .num{font-size:2.5rem;font-weight:900;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+.stat .label{font-size:13px;color:var(--text3);margin-top:4px;font-weight:500}
+
+/* SECTION */
+section{padding:100px 0}
+.section-label{font-size:13px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;line-height:1.1}
+.section-desc{font-size:1rem;color:var(--text2);max-width:520px;margin-bottom:48px;line-height:1.7}
+
+/* FEATURES GRID */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feature-card{padding:28px;border-radius:16px;background:var(--bg2);border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.feature-card:hover{border-color:rgba(59,130,246,0.2);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,0.3),transparent);opacity:0;transition:opacity .3s}
+.feature-card:hover::before{opacity:1}
+.feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.feature-icon.blue{background:rgba(59,130,246,0.1);color:var(--blue)}
+.feature-icon.cyan{background:rgba(6,182,212,0.1);color:var(--cyan)}
+.feature-icon.purple{background:rgba(139,92,246,0.1);color:var(--purple)}
+.feature-icon.green{background:rgba(34,197,94,0.1);color:var(--green)}
+.feature-icon.yellow{background:rgba(234,179,8,0.1);color:#eab308}
+.feature-icon.red{background:rgba(239,68,68,0.1);color:#ef4444}
+.feature-card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.feature-card p{font-size:14px;color:var(--text3);line-height:1.6}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.how-step{text-align:center;padding:32px 24px}
+.how-num{width:48px;height:48px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;margin:0 auto 20px}
+.how-step h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.how-step p{font-size:14px;color:var(--text3);line-height:1.6}
+
+/* MODELS SECTION */
+.models-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.model-card{padding:20px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);text-align:center;transition:all .3s}
+.model-card:hover{border-color:rgba(59,130,246,0.2);transform:translateY(-2px)}
+.model-card .name{font-size:14px;font-weight:600;margin-bottom:4px}
+.model-card .provider{font-size:12px;color:var(--text3)}
+.model-card .badge{display:inline-block;margin-top:8px;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.badge-free{background:rgba(34,197,94,0.1);color:var(--green)}
+.badge-fast{background:rgba(6,182,212,0.1);color:var(--cyan)}
+.badge-pro{background:rgba(139,92,246,0.1);color:var(--purple)}
+
+/* CTA */
+.cta{text-align:center;padding:100px 24px;position:relative}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);pointer-events:none}
+.cta h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:16px}
+.cta p{font-size:1.1rem;color:var(--text2);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* FOOTER */
+footer{padding:40px 0;border-top:1px solid var(--border);text-align:center}
+footer p{font-size:13px;color:var(--text3)}
+footer a{color:var(--blue)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .features-grid,.how-grid{grid-template-columns:1fr}
+  .models-grid{grid-template-columns:repeat(2,1fr)}
+  .stats{flex-direction:column;gap:24px}
+  .nav-links{display:none}
+}
+@media(max-width:480px){
+  .models-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-logo">
+      <div class="icon">A</div>
+      ASUKA AI
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#models">Models</a>
+      <a href="#how">How It Works</a>
+      <a href="#download" class="nav-cta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> v0.1.0 â€” Now Available for Windows</div>
+  <h1><span class="grad">ASUKA AI</span></h1>
+  <p class="subtitle">Your AI coding agent with full access to your Windows PC. Open a folder, chat, and ship â€” all locally on your machine.</p>
+  <div class="hero-btns">
+    <a href="https://github.com/dohanane2023-cmyk/asuka-ai-releases/releases/download/v0.1.0/ASUKA.AI.Setup.0.1.0.exe" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download for Windows
+    </a>
+    <a href="#features" class="btn btn-ghost">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      Learn More
+    </a>
+  </div>
+
+  <div class="hero-mockup">
+    <div class="mockup-bar">
+      <div class="mockup-dot r"></div>
+      <div class="mockup-dot y"></div>
+      <div class="mockup-dot g"></div>
+      <div class="mockup-title">ASUKA AI â€” Terminal</div>
+    </div>
+    <div class="mockup-body">
+      <div><span class="prompt">user@pc</span> <span class="cmd">open folder ./my-project</span></div>
+      <div><span class="comment">// ASUKA: Folder opened â€” scanning 24 files...</span></div>
+      <div>&nbsp;</div>
+      <div><span class="prompt">user</span> <span class="cmd">zid l-function bashirtual li katsupper les doublons</span></div>
+      <div><span class="comment">// ASUKA: Jara7 l-file src/utils/helpers.ts...</span></div>
+      <div>&nbsp;</div>
+      <div>  <span class="tool">write_file</span> <span class="file">src/utils/helpers.ts</span></div>
+      <div>  <span class="tool">read_file</span> <span class="file">src/utils/__tests__/helpers.test.ts</span></div>
+      <div>&nbsp;</div>
+      <div><span class="comment">// ASUKA: Deployit tests wcolli9at 12/12 âœ…</span></div>
+      <div><span class="comment">// ASUKA: Zwina! l-function jdida ka tcheck les doublons b Map</span></div>
+      <div>&nbsp;</div>
+      <div><span class="prompt">user</span> <span class="cmd">commit</span></div>
+      <div><span class="tool">run</span> <span class="cmd">git add . && git commit -m "remove duplicates using Map"</span></div>
+      <div><span class="comment">// ASUKA: Done! ðŸŽ‰ Commit created successfully.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="num">17+</div><div class="label">Built-in Tools</div></div>
+  <div class="stat"><div class="num">425+</div><div class="label">AI Models</div></div>
+  <div class="stat"><div class="num">100%</div><div class="label">Local-First</div></div>
+  <div class="stat"><div class="num">&lt;1s</div><div class="label">Response Time</div></div>
+</div>
+
+<section id="features">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need to<br>ship faster with AI</h2>
+    <p class="section-desc">ASUKA AI gives you full control of your PC through natural conversation. No cloud uploads, no compromises.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon blue">&#x1F4BB;</div>
+        <h3>Full PC Access</h3>
+        <p>Read/write files, run terminal commands, open apps, browse the web â€” ASUKA can do anything on your PC.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon cyan">&#x26A1;</div>
+        <h3>Streaming AI</h3>
+        <p>Watch your agent think and work in real-time. Every tool call, every file edit, streamed live to your screen.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple">&#x1F916;</div>
+        <h3>425+ Models</h3>
+        <p>OpenRouter, OpenAI, Anthropic, Google, Groq â€” pick any model. Free tier available with Nemotron.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon green">&#x1F512;</div>
+        <h3>Local-First</h3>
+        <p>Your code never leaves your machine. All files stay local. No telemetry, no data collection.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon yellow">&#x1F500;</div>
+        <h3>Git Integration</h3>
+        <p>Full git workflow from chat: status, diff, log, commit, branch â€” all through natural conversation.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon red">&#x1F504;</div>
+        <h3>Auto-Update</h3>
+        <p>Always up to date. New features and fixes download and install automatically in the background.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon blue">&#x1F3A8;</div>
+        <h3>4 Dark Themes</h3>
+        <p>Midnight, Ocean, Sunset, Forest â€” beautiful dark themes that are easy on your eyes during long sessions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon cyan">&#x1F30D;</div>
+        <h3>Multi-Language</h3>
+        <p>Talk to ASUKA in Darija, Arabic, English, French, Spanish â€” it understands and responds natively.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple">&#x1F4C4;</div>
+        <h3>Conversation Memory</h3>
+        <p>Persistent chat history. Pin important conversations. Pick up right where you left off.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Start chatting in 3 steps</h2>
+    <p class="section-desc">From download to first commit in under 2 minutes.</p>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <h3>Download & Install</h3>
+        <p>Click download, run the installer. No accounts, no sign-ups. Works immediately.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <h3>Open Your Project</h3>
+        <p>Point ASUKA to any folder on your PC. It scans your codebase and understands the context.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <h3>Chat & Ship</h3>
+        <p>Ask in any language. ASUKA reads, writes, tests, and commits â€” you just review and push.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="container">
+    <div class="section-label">Supported Models</div>
+    <h2 class="section-title">Choose your AI brain</h2>
+    <p class="section-desc">Connect to 425+ models through OpenRouter or bring your own API keys.</p>
+    <div class="models-grid">
+      <div class="model-card"><div class="name">Nemotron 3 Super</div><div class="provider">NVIDIA</div><div class="badge badge-free">Free</div></div>
+      <div class="model-card"><div class="name">GPT-4o</div><div class="provider">OpenAI</div><div class="badge badge-pro">Pro</div></div>
+      <div class="model-card"><div class="name">Claude 3.5 Sonnet</div><div class="provider">Anthropic</div><div class="badge badge-fast">Fast</div></div>
+      <div class="model-card"><div class="name">Gemini 2.5 Pro</div><div class="provider">Google</div><div class="badge badge-pro">Pro</div></div>
+      <div class="model-card"><div class="name">DeepSeek R1</div><div class="provider">DeepSeek</div><div class="badge badge-free">Free</div></div>
+      <div class="model-card"><div class="name">Llama 3.1 405B</div><div class="provider">Meta</div><div class="badge badge-free">Free</div></div>
+      <div class="model-card"><div class="name">Qwen 2.5 Coder</div><div class="provider">Alibaba</div><div class="badge badge-fast">Fast</div></div>
+      <div class="model-card"><div class="name">Grok-2</div><div class="provider">xAI</div><div class="badge badge-pro">Pro</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="cta">
+  <h2>Ready to <span class="grad">code smarter</span>?</h2>
+  <p>Download ASUKA AI for free. No credit card, no account needed. Just download and start coding.</p>
+  <a href="https://github.com/dohanane2023-cmyk/asuka-ai-releases/releases/download/v0.1.0/ASUKA.AI.Setup.0.1.0.exe" class="btn btn-primary" style="font-size:17px;padding:16px 36px">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download for Windows â€” Free
+  </a>
+  <p style="font-size:13px;color:var(--text3);margin-top:16px">Windows 10/11 Â· 79 MB Â· v0.1.0</p>
+</section>
+
+<footer>
+  <div class="container">
+    <p>ASUKA AI &copy; 2026 Â· Built with passion for developers</p>
+  </div>
+</footer>
+
+</body>
+</html>
